@@ -1,7 +1,8 @@
 import React from 'react'
 import {render} from 'react-dom'
-import Media from './src/playlist/components/media'
+import Playlist from './src/playlist/components/playlist'
+import data from './api.json'
 
 const app = document.getElementById('app')
 
-render(<Media type="video" title="What is responsive design?" author="Steve Rogers" image="./images/covers/responsive.jpg" />, app)
+render(<Playlist data={data} />, app)
