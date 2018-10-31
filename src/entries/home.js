@@ -8,11 +8,12 @@ import React from 'react'
 import Home from '../pages/containers/home'
 import reducer from '../reducers/index'
 import logger from 'redux-logger'
+import thunk from 'redux-thunk'
 
 const store = createStore(
     reducer,
     map(),
-    composeWithDevTools(applyMiddleware(logger))
+    composeWithDevTools(applyMiddleware(logger, thunk))
 )
 
 const homeContainer = document.getElementById('home-container')

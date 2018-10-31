@@ -1,4 +1,4 @@
-import { OPEN_MODAL, CLOSE_MODAL, SEARCH_ENTITIES } from '../action-types/index'
+import { OPEN_MODAL, CLOSE_MODAL, SEARCH_ENTITIES, SEARCH_ASYNC_ENTITIES, IS_LOADING } from '../action-types/index'
 
 export function openModal(mediaId) {
     return {
@@ -22,4 +22,23 @@ export function searchEntities(query) {
             query
         }
     }
+}
+
+export function isLoading(value) {
+    return {
+        type: IS_LOADING,
+        payload: {
+            value
+        }
+    }
+}
+
+export function searchAsyncEntities(query) {
+    return (dispatch) => {
+        dispatch(isLoading(true))
+        setTimeout(() => {
+            dispatch(isLoading(false))
+            dispatch(searchEntities(query))
+        }, 5000)
+    }    
 }
