@@ -1,25 +1,18 @@
-import {createStore, applyMiddleware} from 'redux'
-import {render} from 'react-dom'
+import { createStore, applyMiddleware } from 'redux'
+import { render } from 'react-dom'
+import { Provider } from 'react-redux'
+import { Map as map } from 'immutable'
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 import React from 'react'
 import Home from '../pages/containers/home'
-import {Provider} from 'react-redux'
 import reducer from '../reducers/index'
-import {Map as map} from 'immutable'
-
-const logger = ({getState, dispatch}) => next => action => {
-    console.log('PREVIOUS_STATE: ', getState().toJS())
-    console.log('ACTION: ', action)
-    const result = next(action)
-    console.log('NEW_STATE: ', getState().toJS())
-    return result
-}
+import logger from 'redux-logger'
 
 const store = createStore(
     reducer,
     map(),
-    applyMiddleware(logger)
-    //window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    composeWithDevTools(applyMiddleware(logger))
 )
 
 const homeContainer = document.getElementById('home-container')
